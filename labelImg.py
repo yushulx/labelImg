@@ -51,10 +51,10 @@ from libs.hashableQListWidgetItem import HashableQListWidgetItem
 
 # Dynamsoft Barcode Reader >>
 from dbr import *
-license_key = "LICENSE-KEY"
+# license_key = "LICENSE-KEY"
 reader = BarcodeReader()
 # Apply for a trial license: https://www.dynamsoft.com/CustomerPortal/Portal/Triallicense.aspx
-reader.init_license(license_key)
+# reader.init_license(license_key)
 # >> Dynamsoft Barcode Reader
 
 __appname__ = 'labelImg'
@@ -510,6 +510,9 @@ class MainWindow(QMainWindow, WindowMixin):
         if self.filePath and os.path.isdir(self.filePath):
             self.openDirDialog(dirpath=self.filePath, silent=True)
 
+        # Auto-trigger 'Create RectBox' >>
+        self.createShape()
+
     def keyReleaseEvent(self, event):
         if event.key() == Qt.Key_Control:
             self.canvas.setDrawingShapeToSquare(False)
@@ -916,7 +919,7 @@ class MainWindow(QMainWindow, WindowMixin):
         position MUST be in global coordinates.
         """
 
-        # Detect barcode inside the current region <<
+        # Detect barcode inside the current region >>
         reader.reset_runtime_settings() 
         shape = self.canvas.shapes[-1]
         points = shape.points
@@ -979,6 +982,9 @@ class MainWindow(QMainWindow, WindowMixin):
         else:
             # self.canvas.undoLastLine()
             self.canvas.resetAllLines()
+
+        # Auto-trigger 'Create RectBox' >>
+        self.createShape()
 
     def scrollRequest(self, delta, orientation):
         units = - delta / (8 * 15)
