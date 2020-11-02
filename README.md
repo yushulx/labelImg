@@ -35,3 +35,6 @@ python3 labelimg.py
 
 ## About LabelImg
 https://github.com/tzutalin/labelImg
+
+## Blog
+[How to Annotate Barcode Object with LabelImg for Machine Learning](https://www.dynamsoft.com/codepool/annotate-barcode-object-labelimg-machine-learning.html)
